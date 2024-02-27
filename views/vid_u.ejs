@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('../extra/head.ejs');%>
+    <%- include('../extra/pro_view.ejs');%>
+</head>
+<body>
+    <%- include('../extra/viewnav2.ejs');%>
+    <div class="my_pic">
+        <h4>MY PICTURES</h4>
+        <% for(let i=results.length-1 ; i>=0 ; i--){ %>  
+        <div class="edit_pic">
+            <video controls>
+                <source src="/vid/<%= results[i].vid_name %>" type="video/mp4">
+              </video>
+            <div class="edit_info">
+              <div class="file_title"><%= results[i].vid_title %></div>
+              <div class="file_des">
+                <%= results[i].vid_desc %>
+              </div>
+              <a href="/del_u_pic/<%= results[i].pic_id %>" role="button"> <button class="editbutton">delete</button></a>
+            </div> 
+    </div>
+    <%}%> 
+   </div>
+    <div class="utab"></div>
+    <%- include('../extra/script.ejs');%>
+</body>
+</html>

@@ -1,0 +1,3 @@
+this the code in this folder are use as a templete to prevent writing same code multiple time such as code for navbar or headings that is same for all 
+pages so by putting the whole code in a single by we can display in all the web page using '<%- include('../parsel/filename.ejs');%>'
+by puuting in in the html code area where the code is to be written.

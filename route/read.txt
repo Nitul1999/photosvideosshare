@@ -1,0 +1,2 @@
+this folder contain js file consist all the code written in a file for routing or connecting different webpage ...it done
+ due to repetation of writing routing code in the ap.js or server file... or localhost file

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('../extra/head.ejs');%>
+    <%- include('../extra/fileview.ejs');%>
+</head>
+<body>
+    <%- include('../extra/viewnav.ejs');%>
+    <% for(let i=results.length-1 ; i>=0 ; i--) {%>  
+        <<div class="card-container">
+            <div class="float-layout">
+              <div class="card-image">
+                <img src="/pic/<%= results[i].pic_name %>">
+                <div class="card">
+                  <div class="card-title"><%= results[i].pic_title %></div>
+                  <div class="card-desc"><strong>Description: </strong>
+                    <%= results[i].pic_desc %>
+                  </div>
+                 <a href="/pic_download/<%=results[i].pic_id %>"><button class="btn_download2"><i class="fa fa-download"></i> Download</button></a>
+                </div>
+              </div>
+            </div>
+          </div>
+    <%}%>
+    <%- include('../extra/script.ejs');%>
+</body>
+</html>

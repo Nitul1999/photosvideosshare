@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('../extra/head.ejs');%>
+</head>
+<body>
+    <%- include('../extra/nav2.ejs');%>
+    <div class="login">
+        <p class="alert" >⚠️<%=error %></p>
+        <form id="login_form" class="form_class" action="" method="post">
+            <div class="form_div">
+                <label>E-mail:</label>
+                <input class="field_class" name="email" type="email" placeholder="your email" autofocus required>
+                <label>Password:</label>
+                <input id="pass" class="field_class" name="password" type="password" placeholder="password" required>
+                <button class="submit_class" type="submit" form="login_form">LOG-IN</button>
+            </div>
+            <div class="info_div">
+                <p>Don't have account?<a id="sup" href="signup">SIGN-UP</a></p>
+            </div>
+        </form>
+    </div>
+    <%- include('../extra/script.ejs');%>
+</body>
+</html>

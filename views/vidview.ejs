@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('../extra/head.ejs');%>
+    <%- include('../extra/fileview.ejs');%>
+</head>
+<body>
+    <%- include('../extra/viewnav.ejs');%>
+    <% for(let i=results.length-1 ; i>=0 ; i--){ %>  
+        <<div class="card-container">
+            <div class="float-layout">
+              <div class="card-image">
+                <div class="view_in">
+                    <video height="300px" width="200" controls>
+                      <source src="/vid/<%= results[i].vid_name %>" type="video/mp4" >
+                    </video>
+                <div class="card">
+                  <div class="card-title"><%= results[i].vid_title %></div>
+                  <div class="card-desc"><strong>Description: </strong>
+                    <%= results[i].vid_desc %>
+                  </div>
+                 <a href="/vid_download/<%= results[i].vid_id %>"><button class="btn_download2"><i class="fa fa-download"></i> Download</button></a>
+                </div>
+              </div>
+            </div>
+          </div>
+    <%}%>
+    <%- include('../extra/script.ejs');%>
+</body>
+</html>

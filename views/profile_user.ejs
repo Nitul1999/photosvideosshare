@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('../extra/head.ejs');%>
+</head>
+<body>
+    <%- include('../extra/nav.ejs');%>
+    <% for(let i=0 ; i<results.length ; i++){ %>
+    <div class="profile">
+        <div class="prof">
+            <img class="propic" src="pro_icon.ico" alt="Card image cap">
+          </div>
+          <div class="de">
+          <div class="det">
+            <h3>User Id: <strong><%= results[i].user_id %></strong></h3>
+              <h3>Name: <strong><%= results[i].username %></strong></h3>
+              <h3>E-mail: <strong><%= results[i].email %></strong></h3>
+          </div></div>
+          <div class="action-wrapper">
+            <a href="/profile_pic/<%= results[i].user_id %>" role="button"> <button class="userbutton">my picture</button></a>
+            <a href="/profile_vid/<%= results[i].user_id %>" role="button"> <button class="userbutton">my videos </button></a>
+            <!-- <a href="" role="button"> <button class="userbutton">pendings</button></a> -->
+           </div>
+    </div>
+    <%}%> 
+   </div>
+    <div class="utab"></div>
+    <%- include('../extra/script.ejs');%>
+</body>
+</html>

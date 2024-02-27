@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('../extra/head.ejs');%>
+    <%- include('../extra/pro_view.ejs');%>
+</head>
+<body>
+    <%- include('../extra/viewnav.ejs');%>
+    <% for(let i=0 ; i<results.length ; i++){ %>
+    <div class="upd_des">
+        <h4>UPDATE YOUR PICTURE INFO</h4>
+        <form  class="upd_form" method="post">
+            <label>TITLE</label><br>
+            <input class="desc" type="text" name="pic_title" value="<%= results[i].pic_title %>"required><br>
+            <label>Description</label><br>             
+            <textarea class="desc" name="pic_desc" ><%= results[i].pic_desc %></textarea><br>
+            <button class='upd_button' type="submit" name="submit">UPDATE</button>
+          </form>
+</div><%}%> 
+    <div class="utab"></div>
+    <%- include('../extra/script.ejs');%>
+</body>
+</html>

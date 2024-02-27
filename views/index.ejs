@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('../extra/viewcss.ejs');%>
+    <%- include('../extra/head.ejs');%>
+</head>
+<body>
+  <% if( stat=='login') { %>
+    <%- include('../extra/nav.ejs');%>
+    <%} else  {%>
+      <%- include('../extra/nav2.ejs');%>
+      <%}%>
+    <div class="scroll">
+    <section class="cd-intro">
+        <div class="cd-intro-content bouncy">
+           <h1 class="hi">WELCOME</h1>
+           <p>Select your preferences.Select pictures or videos</p>
+           <div class="action-wrapper">
+            <a class="btn btn-primary" href="/" role="button">Pictures</a>
+            <a class="btn btn-primary" href="video" role="button">Videos</a>
+           </div>
+        </div>
+     </section>
+     <div class="line"></div>
+     <div class="gal">
+      <% for(let i=rows.length-1 ; i>=0 ; i--){ %>  
+        <div class="view">
+          <div class="view_in">
+       <a><img class="myImg" src="/pic/<%= rows[i].pic_name %>" width="300" height="200"></a>  
+        <!-- <div class="img_info"> -->
+          <label><strong><%= rows[i].pic_title %></strong></label>
+          <p><%= rows[i].pic_desc %></p>
+            <a href="/picview/<%= rows[i].pic_id %>" ><button class="btn_view"  type="button" class="btn_view" >view</button></a>
+          <a href="/pic_download/<%= rows[i].pic_id %>"><button class="btn_download"><i class="fa fa-download"></i> Download</button></a>
+          </div>
+          </div>
+        <%}%> 
+      </div>
+      
+<script>
+  </script>
+  
+    <%- include('../extra/script.ejs');%>
+</body>
+</html>

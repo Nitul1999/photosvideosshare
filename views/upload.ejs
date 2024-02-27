@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('../extra/head.ejs');%>
+</head>
+<body>
+    <%- include('../extra/nav.ejs');%>
+    <!-- <div class="upload">
+        <h1 class="opt">select file type</h1>
+        <div class="box">
+            <select>
+              <option id="pic">PICTURE</option>
+              <option id="vid">VIDEO</option>
+            </select>
+          </div>
+    </div> -->
+    <div class="uphoto">
+        <h2>Select picture/video</h2>
+        <div class="pics">
+        <p>
+           <button class="button" id="pic" data-modal="modalOne">UPLOAD PICTURES</button> 
+        </p>
+        <p>
+          <button class="button" id="vid" data-modal="modalTwo">UPLOAD VIDEOS</button>
+        </p></div>
+        <% for(let i=rows.length-1 ; i>=0 ; i--){ %>  
+        <div id="modalOne" class="modal">
+          <div class="modal-content">
+            <div class="contact-form">
+              <a class="close">&times;</a>
+              <form class="pic1" method="post" enctype="multipart/form-data">
+                <h2>upload picture</h2>
+               Hey! Your Id <input class="user_file_id" style="background-color: transparent;border: none;" type="text" name="id" value="<%= rows[i].user_id %>" class="field left" readonly>
+               
+                <!-- -->
+                <div>
+                  <p>Click here to select picture</p>
+                  <input class="picinput" type="file" accept="image/*" name="file" required/>
+                  <input type="text" name="title" placeholder="tiltle" required/>
+                  <!-- <input type="text" name="name" placeholder="details" /> -->
+                </div>
+                <span>Details or info about the picture(Maximum 200 word)</span>
+                <div>
+                  <textarea rows="4" name="details" required></textarea>
+                </div>
+               <button type="submit">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div id="modalTwo" class="modal">
+          <div class="modal-content">
+            <div class="contact-form">
+              <span class="close">&times;</span>
+              <form method="post" enctype="multipart/form-data">
+                <h2>Select Video</h2>
+               Hey! Your Id <input class="user_file_id" style="background-color: transparent;border: none;"  type="text" name="id" value="<%= rows[i].user_id %>" class="field left" readonly>
+                <div>
+                  <p>Click here to select video</p>
+                  <input class="picinput" type="file" name="file" accept="video/*" required/>
+                  <input type="text" name="title" placeholder="tiltle" required/>
+                  <!-- <input type="text" name="name" placeholder="details" /> -->
+                </div>
+                <span >Details or info about the video(Maximum 200 word)</span>
+                <div>
+                  <textarea rows="4" name="details" required></textarea>
+                </div>
+               <button type="submit" >Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%}%>  
+    <%- include('../extra/script.ejs');%>
+    <script>
+        let modalBtns = document.querySelectorAll(".button");
+        modalBtns.forEach(function (btn) {
+          btn.onclick = function () {
+            let modal = btn.getAttribute("data-modal");
+            document.getElementById(modal).style.display = "block";
+          };
+        });
+        let closeBtns = document.querySelectorAll(".close");
+        closeBtns.forEach(function (btn) {
+          btn.onclick = function () {
+            let modal = btn.closest(".modal");
+            modal.style.display = "none";
+          };
+        });
+        window.onclick = function (event) {
+          if (event.target.className === "modal") {
+            event.target.style.display = "none";
+          }
+        };
+      </script>
+</body>
+</html>

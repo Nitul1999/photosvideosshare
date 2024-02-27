@@ -1,0 +1,1 @@
+this folder conain routing middleware for the server (localhost file) i.e it is given to rot.js file to manage routing

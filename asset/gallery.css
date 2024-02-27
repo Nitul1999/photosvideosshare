@@ -1,0 +1,136 @@
+.gal{
+    position: relative;
+    padding: 10px;
+}
+.view{
+  padding: 0 10px;
+  float: left;
+  width: 25%;
+  margin-top: 80px;
+  border-radius: 20px;
+}
+.view_in{
+  border-radius:30px ;
+  background-image: linear-gradient(to bottom, #d28ee5, #ff8dbe, #ff9e97, #ffaa79, #f1e4a8);
+}
+.view img{
+  width: 100%;
+  border-radius: 30px;
+  height: auto;
+}
+label{
+  text-align: center;
+}
+p{
+  text-align: center;
+}
+.view video{
+  width: 100%;
+  border-radius: 30px;
+  height: auto;
+  margin-right: 10px;
+  margin-top: 30px;
+}
+@media only screen and (max-width:500px) {
+  .view{
+    width: 100%;
+  }
+  
+}
+
+/* pop up */
+/*  */
+.float-layout {
+  padding: 5px 120px;
+  float: left;
+  width: 100%;
+  height: 50%;
+  box-sizing: border-box;
+}
+
+.card-container {
+  overflow: hidden;
+  margin-top: 190px;
+}
+
+.card {
+  background-image: linear-gradient(to bottom, #d28ee5, #ff8dbe, #ff9e97, #ffbb7f, #ebd883);
+  color: black;
+  min-height: 100%; /*replace this it in width: 100%*/
+  width: 50%;
+  float: right;
+  border-radius: 30px;
+}
+
+.card-title {
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+  padding-top: 20px;
+}
+
+.card-desc {
+  padding: 10px;
+  text-align: left;
+  font-size: 18px;
+}
+
+/*add this it*/
+.card-image {
+  /* display: flex; */
+  height: 100%;
+}
+/*-------------*/
+
+ div.card-image img {
+  width:50%; 
+  height:auto;
+  padding: 5px 70px;
+  border-radius: 40px;
+  background-image: linear-gradient(to bottom, #d28ee5, #ff8dbe, #ff9e97, #ffbb7f, #ebd883);
+} 
+
+/* Phone Devices Query */
+@media only screen and (max-width: 37.5em) {
+  div.card-image img {
+    width: 100%;
+    height: auto;
+  }
+  
+  /*add this it*/
+  .card-image {
+     flex-direction: column;
+  }
+  /*----------------------*/
+
+  .card {
+    width: 100%;
+    margin-top: 5px;
+  }
+}
+.btn_view{
+  height: 40px;
+  width: 50px;
+  border-color: beige;
+  border-radius: 30px;
+  background-image: linear-gradient(to bottom, #d069ec, #f0609e, #f77a71, #f09749, #ebd883);
+}
+.btn_download{
+  height: 40px;
+  border-color: beige;
+  border-radius: 30px;
+  background-image: linear-gradient(to bottom, #f5b2df, #fa529b, #ff9e97, #c9cf6b, #fdeb9b);
+}
+.btn_download2{
+  float: right;
+  height: 50px;
+  border-radius: 30px;
+  background-image: linear-gradient(to bottom, #d069ec, #f0609e, #f77a71, #f09749, #ebd883);
+}
+div.card-image video {
+  width:50%; 
+  height:auto;
+  padding: 5px 70px;
+  border-radius: 40px;
+  background-image: linear-gradient(to bottom, #d28ee5, #ff8dbe, #ff9e97, #ffbb7f, #ebd883);
+} 

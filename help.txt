@@ -1,0 +1,473 @@
+const apik = require('../middleware/apikey');
+const router = require('express').Router();
+const apikmid = require('../middleware/apikey');           //importing middleware api 
+let prod = require('../producData')
+const fpic = require('express-fileupload');
+const fs = require("fs");
+const flash = require('connect-flash');
+router.use(flash());
+const coki = require('cookie-parser');
+router.use(coki());
+const mysql = require('mysql');                 //importing mysql
+const sees = require('express-session');
+const bodyParser = require('body-parser');          //body parser is needed to parse or  to take data after submition like in  form
+const { json } = require('body-parser');
+const fileUpload = require('express-fileupload');
+const path = require('path');
+const bcrypt=require('bcrypt');
+const saltRounds=10;
+router.use(bodyParser.urlencoded({ extended: true }))
+router.use(fileUpload());
+router.use(sees({
+    secret: 'some secret',
+    cookie: { maxAge: 1000 * 60 * 60 * 24 },
+    saveUninitialized: false
+}))
+// //router.use(apikmid);                             //importing middlware for whole file
+router.use(bodyParser.json())
+//router.use(fileUpload());
+//router.get('/',apikmid,(req,res)=>                                             //writing one by one
+const pool = mysql.createPool({          //create a pool or a area where database and details are there
+    connectionLimit: 10,
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'exp_db'
+
+})
+router.get('/rec', (req, res) =>          // getting data from row and column or table from the database 
+{
+    pool.getConnection((err, connection) => {
+        if (err) throw err;
+
+        connection.query('SELECT * from profile', (err, rows) => {
+            connection.release()
+            if (!err) {
+                res.send(rows);
+            } else {
+                res.send('error');
+            }
+        })
+    })                                     //res render is use for dynamic purpose
+})
+router.get('/rec/:id', (req, res) =>              //get data by keys like id,name etc
+{
+    const { id } = req.params;
+    pool.getConnection((err, connection) => {
+        if (err) throw err;
+
+        connection.query('SELECT * from profile WHERE id =?', id, (err, rows) => {
+            connection.release()
+            if (!err) {
+                res.send(rows);
+            } else {
+                res.send('error');
+            }
+        })
+    })                                     //res render is use for dynamic purpose
+})
+router.get('/', (req, res) => {
+    //res.sendFile(path.resolve(__dirname,'index.html'))
+    res.render('index', {
+        title: 'home page'              //object for dynamicalling add element by using key(tile or any word) inside dom
+    });                                        //res render is use for dynamic purpose
+})
+router.get('/sign', (req, res) => {
+    //res.sendFile(path.resolve(__dirname,'enter.html'))
+    res.render('enter', {
+        title: 'sign in'
+    });
+})
+// Add beer
+router.post('/sign', (req, res) => {
+
+        pool.getConnection( async(err, connection) => {
+            if (err)
+                throw err;
+
+            // const {name,mail,password} = req.body
+            const name = req.body.name;
+            const email = req.body.mail;
+            const password = await bcrypt.hash(req.body.password, saltRounds);
+
+            connection.query('SELECT * FROM profile where email=?', [email], function (error, results) {
+                connection.release();
+                if (error)
+                    throw error;
+                console.log(results);
+                if (results.length > 0) {
+                    res.send('email already exist');
+                } else {
+                    connection.query('INSERT INTO profile SET ?', ({ username: name, email: email, password: password }), (err, rows) => {
+                        // return the connection to pool
+                        if (!err) {
+                            res.redirect('/about');
+                            console.log(err);
+                        }
+
+                        console.log('The data from beer table are:11 \n', rows);
+
+                    });
+                }
+            });
+        });
+    });
+router.get('/about', (req, res) => {
+    pool.getConnection((err, connection) => {
+        if (err) throw err
+
+        connection.query('SELECT * from profile', (err, rows) => {
+            connection.release()
+            if (!err) {
+                res.render('about', {
+                    title: 'about us',
+                    heading: 'ABOUT US ::',
+                    row: rows
+                })
+            } else {
+                res.send('error');
+            }
+        })
+    })                                     //res render is use for dynamic purpose
+})
+router.post('/about', (req, res) => {
+    const name = req.body.search;
+    pool.getConnection((err, connection) => {
+        if (err) throw err
+
+        connection.query('SELECT * from profile WHERE username LIKE?', ['%' + name + '%'], (err, rows) => {
+            //     connection.query(' SELECT * from profile WHERE username LIKE?', (name), (err, rows) => {
+            connection.release()
+            console.log(rows)
+            if (!err) {
+                res.render('about', {
+                    title: 'about us',
+                    heading: 'ABOUT US ::',
+                    row: rows
+                })
+            } else {
+                res.send('error');
+            }
+        })
+    })
+})
+router.get('/ab/:id', (req, res) => {
+
+    pool.getConnection((err, connection) => {                      // params is is givent in href of edit button in about file
+        if (err) throw err; // not connected
+        console.log('Connected!');
+        connection.query('SELECT * FROM profile WHERE id = ?', [req.params.id], (err, rows) => {
+            connection.release()
+            console.log(req.params.id)
+            if (!err) {
+                res.render('upd', { rows });
+            } else {
+                console.log(err);
+            }
+            console.log('The data from user table: \n', rows);
+        });
+    })
+})
+router.post('/ab/:id', (req, res) => {
+
+    pool.getConnection((err, connection) => {
+        if (err) throw err; // not connected
+        console.log('Connected!');
+        const { name, mail, password } = req.body;
+        // User the connection
+        connection.query('UPDATE profile SET username = ?,  email = ?, password = ? WHERE id = ?', [name, mail, password, req.params.id], (err, rows) => {
+
+            if (!err) {
+                res.render('go');
+            } else {
+                console.log(err);
+            }
+            console.log('The data from user table: \n', rows);
+        });
+
+    })
+
+})
+router.get('/gallery', (req, res) => {
+    //res.sendFile(path.resolve(__dirname,'gallery.html'))
+    res.render('gallery', {
+        title: 'gallery photos'
+    });
+})
+router.get('/download/:id', (req, res) => {
+    pool.getConnection((err, connection) => {
+        if (err) throw err;
+
+        connection.query('SELECT * from okol where id=?', [req.params.id], (err, rows) => {
+            connection.release()
+            rows.forEach(element => {
+                //     console.log(element.picture)
+                // })
+                if (!err) {
+                    res.download(path.join(__dirname, '../popo', `${element.picture}`));
+                } else {
+                    console.log(err);
+                }
+            })
+        });
+    })       //to download       //to download
+})
+router.get('/galins', (req, res) => {
+    res.render('galins', {
+        title: 'picture'
+    });
+})
+ router.post('/galins', (req, res) => {
+     pool.getConnection((err, connection) => {
+         let sampleFile;
+         let uploadPath;
+
+         if (!req.files || Object.keys(req.files).length === 0) {
+             return res.status(400).send('No files were uploaded.');
+         }
+
+         // name of the input is sampleFile
+         sampleFile = req.files.sampleFile;
+         uploadPath = 'popo/' + sampleFile.name;
+        go = req.body.tecc;
+
+         console.log(sampleFile);
+         // Use mv() to place file on the server
+         sampleFile.mv(uploadPath, function (err) {
+             if (err) return res.status(500).send(err);
+
+           connection.query('INSERT into okol SET picture=?,data=?', [sampleFile.name, go], (err, rows) => {
+                 connection.release()
+                 if (!err) {
+                     res.redirect('/');
+                 } else {
+                     console.log(err);
+                 }
+             });
+         });
+
+     })
+ })
+// router.post('/galins', (req, res) => {
+//     pool.getConnection((err, connection) => {
+//         let sampleFile;
+//         let uploadPath;
+
+//         if (!req.files || Object.keys(req.files).length === 0) {
+//             return res.status(400).send('No files were uploaded.');
+//         }
+
+//         // name of the input is sampleFile
+//         sampleFile = req.files.sampleFile;
+//         // let i=path.extname(sampleFile.name)
+//         // console.log(i);
+//         for(let i=0;i<sampleFile.length;i++){
+//         uploadPath = 'popo/' + sampleFile[i].name;
+//         go = req.body.tecc;
+//         let o=path.extname(sampleFile[i].name)
+//         console.log(o);
+//         // Use mv() to place file on the server
+//         sampleFile[i].mv(uploadPath, function (err) {
+//             if (err) return res.status(500).send(err);
+             
+            
+//             connection.query('INSERT into okol SET picture=?,data=?', [sampleFile[i].name, go], (err, rows) => {
+//                 if(err)
+//                 res.send('error');
+//             }) });}
+//                 connection.release()
+//                 // if (!err) {
+//                    res.redirect('/');
+//                 // } else {
+//                 //     console.log(err);
+//                 // }
+//            // });
+//         //});
+//     })
+// })
+router.get('/display', (req, res) => {
+    pool.getConnection((err, connection) => {
+        if (err) throw err
+
+        connection.query('SELECT * from okol', (err, rows) => {
+            connection.release()
+            for(let i=0;i<rows.length;i++){
+            let o=path.extname(rows[i].picture);
+            console.log(o);
+            }
+            if (!err) {
+                res.render('display', {
+                    title: 'display',
+                    row: rows
+                })
+            } else {
+                res.send('error');
+            }
+        })
+    })                                     //res render is use for dynamic purpose
+})
+router.get('/vid', (req, res) => {
+    pool.getConnection((err, connection) => {
+        if (err) throw err
+
+        connection.query('SELECT * from okol', (err, rows) => {
+            connection.release()
+            // for(let i=0;i<rows.length;i++){
+            // let o=path.extname(rows[i].picture);
+            
+            if (!err) {
+                res.render('go', {
+                    title: 'go',
+                    row: rows
+                })
+            } else {
+                res.send('error');
+            }
+        //}}
+        })
+    })                                     //res render is use for dynamic purpose
+})
+router.get('/login', (req, res) => {
+    const erro = req.flash('text');           //here 'text' is a key for flash 
+    if (req.session.loggedin) {
+        res.redirect('/prod')
+    } else {
+        res.render('login', { erro })              // flash taking as object
+    }
+})
+// router.post('/login',  function (request, response) {
+//     pool.getConnection(async(err, connection) => {
+//         if (err) throw err;
+
+//         var username = request.body.username;
+//         var password = request.body.password;
+//         if (username && password) {
+//             connection.query('SELECT * FROM profile WHERE password=?', [password], function (error, results) {
+//                 connection.release();
+//                 if(error) throw error;
+
+//                 if(results==0){
+//                     const comp=await bcrypt.compare(password,results[0].password)
+//                     if(!comp)
+//                     request.flash('text', 'wrong password try again')                      //flash for error message with key 'text' and message ''wrong info'
+//                     response.redirect('/login');
+//                 }else{
+//                connection.query('SELECT * FROM profile WHERE username = ? AND password = ?', [username, password], function (error, results) {
+//                 //connection.release()
+//                 if (results.length > 0) {
+//                     request.session.loggedin = true;
+//                     request.session.username = username;
+//                     response.redirect('/prod');
+//                 } else {
+//                     request.flash('text', 'wrong info')                      //flash for error message with key 'text' and message ''wrong info'
+//                     response.redirect('/login');
+//                 }
+//                 response.end();
+//             });
+//             }})
+//         } else {
+//             response.send('Please enter Username and Password!');
+//             response.end();
+//         }
+//     })
+//});
+router.post('/login',   (request, response) => {
+        pool.getConnection((err, connection) => {
+            if (err)
+                throw err;
+            var username = request.body.username;
+            var password = request.body.password;
+            if (username && password) {
+
+                connection.query('SELECT * FROM profile WHERE username = ?', [username], async function (error, results) {
+                    connection.release();
+                    try{
+                    if (results.length > 0) {
+                        const comp = await bcrypt.compare(password, results[0].password);
+                        console.log('waitingggggg')
+                        if (comp) {
+                         if (results.length > 0) {
+                            request.session.loggedin = true;
+                            request.session.username = username;
+                            response.redirect('/prod');
+                        } else{
+                            request.flash('text', 'wrong password try again'); //flash for error message with key 'text' and message ''wrong info'
+                            response.redirect('/login');
+                        }
+                    }}
+                    else {
+                        request.flash('text', 'wrong info'); //flash for error message with key 'text' and message ''wrong info'
+                        response.redirect('/login');
+                    }
+                    response.end();
+                }catch(e){
+                    response.status(400).json('Something broke!');
+                }
+                });
+            } else {
+                response.send('Please enter Username and Password!');
+                response.end();
+            }
+        });
+    })
+router.get('/prod', (req, res) => {
+    if (req.session.loggedin) {
+        pool.getConnection((err, connection) => {
+            if (err) throw err
+            console.log(req.session.username)
+            connection.query('SELECT * from profile WHERE username=?', [req.session.username], (err, rows) => {
+                connection.release()
+                console.log(rows)
+                if (!err) {
+                    res.render('prod', {
+                        title: 'display',
+                        row: req.session.username,
+                        ro: rows
+                    })
+                } else {
+                    res.flash('error');
+                }
+            })
+        })
+    } else {
+        res.send('log in please')
+    }                                    //res render is use for dynamic purpose
+})
+router.get('/logout', (req, res) => {
+    if (req.session.loggedin) {
+        req.session.destroy();
+        res.redirect('/');
+    } else {
+        res.send('not log in')
+    }
+});
+router.post('/logout', (req, res) => {
+    if (req.session.loggedin) {
+        req.session.destroy();
+        res.redirect('/');
+    } else {
+        res.send('not log in')
+    }
+});
+router.get('/del/:id', (req, res) => {                         // delet is done by get not post
+    pool.getConnection((err, connection) => {
+        if (err) throw err; // not connected
+        console.log('Connected!');
+        // User the connection
+        connection.query('DELETE FROM profile where id=?', [req.params.id], (err, rows) => {
+            // connection.release()
+            if (!err) {
+                connection.query('DELETE FROM pro where uid=?', [req.params.id], (err, rows) => {
+                    connection.release()
+                    console.log('done')
+                })
+                res.redirect('/about');
+            } else {
+                console.log(err);
+            }
+            console.log('The data from user table: \n', rows);
+        });
+
+    })
+})
+module.exports = router      //to export 

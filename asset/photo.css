@@ -1,0 +1,291 @@
+  .uphoto{
+    position: relative;
+   width: 100%;
+   height: 100%;
+   top: 250PX;
+   /* border: solid; */
+   padding: 30px;
+  }
+  h2{
+    color: white;
+    font-size: 2.3em;
+    height: 100px;
+    text-align: center;
+  }
+  .pics{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+   
+  }
+  #pic{
+      border-radius: 30px;
+      font-size: 1.6em;
+      color: rgb(255, 255, 255);
+      height: 70px;
+      width: 400px;
+      background-image: linear-gradient(to right top, #920c58, #c234a8, #ba83ca, #9566e6, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #cfd142, #e9cc49, #cf9e17);
+
+  }
+  #pic:hover{
+    border-radius: 5opx;
+    background-image: linear-gradient(to bottom, #7037e4, #ce4ec8, #9c4cc2, #3976c7, #8c15c4);
+  }
+  #vid{
+    border-radius: 30px;
+    font-size: 1.6em;
+    height: 70px;
+    color: rgb(255, 255, 255);
+    width: 400px;
+    background-image: linear-gradient(to right top, #144aad, #297fc5, #3e81b8, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #ade78b, #79cc48, #28a14d);
+
+  }
+  #vid:hover{
+    border-radius: 5opx;
+    background-image: linear-gradient(to bottom, #7037e4, #ce4ec8, #9c4cc2, #3976c7, #8c15c4);
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 8;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  .modal-content {
+    margin: 50px auto;
+    /* border: 1px solid #999; */
+    width: 60%;
+  }
+  /* h2,
+  p {
+    margin: 0 0 20px;
+    font-weight: 400;
+    color: #999;
+  } */
+  span {
+    color: rgb(255, 255, 255);
+    display: block;
+    padding: 0 0 5px;
+  }
+  form {
+    padding: 25px;
+    margin: 25px;
+    box-shadow: 0 2px 5px #ffffff;
+    background-image: linear-gradient(to right top, #5bd1c7, #1388cc, #008793, #00bf72, #a8eb12);
+  }
+  input,
+  textarea {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #1c87c9;
+    outline: none;
+  }
+  .contact-form button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #010608;
+    font-size: 16px;
+    font-weight: 400;
+    color: #fff;
+  }
+  button:hover {
+    background: #2371a0;
+  }
+  .close {
+    color: rgb(255, 255, 255);
+    padding: 30PX;
+    margin: 20px;
+    height: 100px;
+    float: right;
+    font-size: 98px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: rgb(3, 0, 0);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  button.button {
+    background: none;
+    border-top: none;
+    outline: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: #02274a 1px solid;
+    padding: 0 0 3px 0;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  button.button:hover {
+    border-bottom: #a99567 1px solid;
+    color: #a99567;
+  }
+  .picinput{
+    background-color: #e0ba73
+  }
+  /* login */
+  .login{
+    position: relative;
+    top: 130px;
+    height: 100%;
+   }
+  #login_form{
+    position: relative;
+    text-align: center;
+    margin-left: 25%;
+    margin-right:25%;
+    width: 50%;
+    box-shadow: 0 2px 5px #ffffff;
+    background-image: linear-gradient(to right top, #142241, #134f61, #1e9974, #09438f, #2f125c);
+  }
+  .form_class {
+    width: 500px;
+    /* padding: 40px; */
+    border-radius: 8px;
+    /* background-color: white; */
+    font-family: 'system-ui';
+    box-shadow: 5px 5px 10px rgb(0,0,0,0.3);
+}
+.form_div {
+    text-transform: uppercase;
+    padding: 60px;
+}
+.form_div > label {
+    letter-spacing: 3px;
+    font-size: 1em;
+    color: white;
+}
+.info_div {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 1.3em;
+    letter-spacing: 1px;
+    color: #52cffe;
+}
+#sup {
+    color: white;
+}
+#sup:hover{
+  color: #80035a;
+}
+.field_class {
+    width: 100%;
+    border-radius: 6px;
+    border-style: solid;
+    border-width: 1px;
+    height: 50px;
+    padding: 9px 0px;
+    text-indent: 6px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-family: 'system-ui';
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+}
+.submit_class {
+    border-style: none;
+    border-radius: 5px;
+    background-color: #FFE6D4;
+    padding: 8px 20px;
+    font-family: 'system-ui';
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    box-shadow: 2px 2px 5px rgb(0,0,0,0.2);
+    cursor: pointer;
+}
+.alert{
+  text-align: center;
+  font-size: 2em;
+}
+/* signup page */
+#login_form2{
+  position: relative;
+  text-align: center;
+  margin-left: 25%;
+  margin-right:25%;
+  width: 50%;
+  box-shadow: 0 2px 5px #ffffff;
+  background-image: linear-gradient(to right top, #0b5202, #7db425, #6fb331, #2bc295, #0d3b50);
+}
+.form_class2 {
+  width: 500px;
+  /* padding: 40px; */
+  border-radius: 8px;
+  /* background-color: white; */
+  font-family: 'system-ui';
+  box-shadow: 5px 5px 10px rgb(0,0,0,0.3);
+}
+.form_div2 {
+  text-transform: uppercase;
+  padding: 60px;
+}
+.form_div2 > label {
+  letter-spacing: 3px;
+  font-size: 1rem;
+  color: white;
+}
+.info_div2 {
+  text-align: center;
+  margin-top: 7px;
+  font-size: 1.3em;
+  letter-spacing: 1px;
+  color: #b7c595;
+}
+.field_class2 {
+  width: 100%;
+  border-radius: 6px;
+  border-style: solid;
+  border-width: 1px;
+  height: 40px;
+  padding: 9px 0px;
+  text-indent: 6px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-family: 'system-ui';
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+}
+.submit_class2 {
+  border-style: none;
+  border-radius: 5px;
+  background-color: #FFE6D4;
+  padding: 8px 20px;
+  font-family: 'system-ui';
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  display: block;
+  margin: auto;
+  margin-top: 10px;
+  box-shadow: 2px 2px 5px rgb(0,0,0,0.2);
+  cursor: pointer;
+}
+#sup2 {
+  color: white;
+}
+#sup2:hover{
+color: #80035a;
+}
+.profile{
+  position: relative;
+  top: 150px;
+}
+.card{
+  width: 230px;
+  background-color: transparent;
+  border: none;
+}
+.card-img-top{
+  border-radius: 50%;
+  height: 180px;
+}

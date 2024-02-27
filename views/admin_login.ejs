@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('../extra/head.ejs');%>
+</head>
+<body>
+   <nav class="navbar fixed-top navbar-expand-lg  navbar-dark ">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">nitul</a>
+            <a class="nav-link" id="home" aria-current="page" href="/">Home</a>
+          </div>
+        </div> -->
+      </div>
+    </nav>
+    <form class="admin_form" method="post">  
+      <%= error %>
+      <div class="admin_log">   
+          <label>Username : </label>   
+          <input type="text" placeholder="Enter Username" name="name" required>  
+          <label>Password : </label>   
+          <input type="password" placeholder="Enter Password" name="password" required>  <br>
+          <button class="admin_button" type="submit">Login</button>    
+      </div>   
+  </form>     
+   
+    <%- include('../extra/script.ejs');%>
+</body>
+</html>

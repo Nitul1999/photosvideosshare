@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <%- include('../extra/head.ejs');%>
+</head>
+<body>
+  <%- include('../extra/admin_head.ejs');%>
+    <div class="admin_content">
+      <h1 class="lou">LIST OF USER</h1>
+        <% for(let i=rows.length-1 ; i>=0 ; i--){ %> 
+      <div class="admin_user">
+        <p id="entity"><strong style="font-size: 0.8em;">id:</strong> <%= rows[i].user_id %></p>
+        <p id="see_n" class="ad_con"><strong style="font-size: 0.8em;">NAME:</strong> <%= rows[i].username %></p>
+        <p id="see_e" class="ad_con"><strong style="font-size: 0.8em;">E-mail:</strong>  <%= rows[i].email %></p>
+        <a class="ad_con" href="/del_user/<%= rows[i].user_id %>" role="button"> <button class="admin_view"w>delete</button></a>
+        <a class="ad_con" href="/pic_u/<%= rows[i].user_id %>" role="button"> <button class="admin_view">picture</button></a>
+        <a class="ad_con" href="/vid_u/<%= rows[i].user_id %>" role="button"> <button class="admin_view">videos</button></a>
+      </div>
+      <%}%>  
+   
+    </div>
+    <%- include('../extra/script.ejs');%>
+</body>
+</html>

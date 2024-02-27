@@ -1,0 +1,109 @@
+.admin_form{
+    border: solid;
+    height: 400px;
+    padding: 10px;
+    margin-top: 210px;
+    margin-left: 30%;
+    width: 500px;
+}
+.admin_log{
+    padding: 20px;
+    margin-top: 9px;
+}
+.admin_button{
+    width: 400px;
+    height: 50px;
+    margin: 5px;
+    border-radius: 20px;
+    border: solid;
+    padding: 10px;
+}
+.admin_content{
+    /* border: solid; */
+    margin-top: 250px;
+    height: auto;
+    justify-content: center;
+}
+.admin_user1{
+    /* border: solid; */
+    display: flex;
+    width: 90%;
+    margin-left: 10PX;
+    border-radius: 30px;
+    padding-top: 2px;
+    padding-left: 100px;
+}
+.admin_user{
+    /* border: solid; */
+    display: flex;
+    width: 100%;
+    margin-left: 9PX;
+    border-radius: 30px;
+    padding-top: 6px;
+    padding-left: 90px;
+    background-image: linear-gradient(to bottom, #cd9adb, #dd76a2, #f77a71, #f09749, #e9eb83);
+}
+.ad_con1{
+    margin-left: 170px;
+    font-size: 1.6em;
+    font-weight: 600;
+}
+#p{
+    margin-left: 200px;
+}
+.ad_con{
+    margin-left: 80px;
+}
+#see_n{
+    font-size: 2.4em;
+}
+#see_e{
+    font-size: 2.1em;
+    padding: 5px;
+}
+.admin_view{
+    height: 50px;
+    width: 130px;
+    margin: 5px;
+    background-color: ghostwhite;
+    border-radius: 30px;
+
+}
+#entity{
+    font-size: 2.4em;
+    font-weight: 400;
+}
+#ad_1{
+    font-size: 2em;
+    border: solid;
+    border-radius: 60px;
+    color: white;
+}
+#ad_1:hover{
+    background-color: rgb(22, 3, 39);
+}
+#ad_2{
+    font-size: 2em;
+    border: solid;
+    border-radius: 60px;
+    margin-right: 400px;
+    color: white;
+}#ad_2:hover{
+    background-color: rgb(22, 5, 37);
+}
+#ad_lo{
+    font-size: 1em;
+    border: solid;
+    border-radius: 60px;
+    padding: 10px;
+    color: white;
+}
+#ad_lo:hover{
+    background-color: #f77a71;
+}
+.lou{
+    margin-left: 40%;
+    font-size: 2em;
+    width: 230px;
+    border: dotted;
+}
